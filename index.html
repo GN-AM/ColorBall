@@ -1,0 +1,79 @@
+<body>
+  <div class="container" style="
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid black;
+    width: 350px;
+    height: 450px;">
+
+      <div id="ball" style="
+      z-index:5;
+      position:absolute;
+      left:0px;
+      top:0px;
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      background: #1bce15"></div>
+  </div>
+
+  <script>
+
+    var velocityX = 1;
+    var positionX = 200;
+    var velocityY = 2;
+    var positionY = 100;
+    var directionX = 1;
+    var directionY = 1;
+    var ball = document.getElementById('ball');
+    var counter = 0;
+
+    var colores = ["#ce1515", "#1bce15", "#0000aa", "#f1e31e"];
+    // YOUR CODE 
+    function movement(){    
+      /////// Horizontal movement
+      if (directionX === 1) {
+        positionX = positionX + velocityX;
+        ball.style.left = positionX + "px";
+          if (positionX >= 300) {
+              directionX = 0;
+              ball.style.background = colores[0];
+            };
+      } else {
+        positionX = positionX - velocityX;
+        ball.style.left = positionX + "px";
+          if (positionX <= 0) {
+            directionX = 1;
+            ball.style.background = colores[2];
+          };
+      }
+      /////// Vertical movement
+      if (directionY === 1) {
+        positionY = positionY + velocityY;
+        ball.style.top = positionY + "px";
+          if (positionY >= 400) {
+              directionY = 0;
+              ball.style.background = colores[1];
+            };
+      } else {
+        positionY = positionY - velocityY;
+        ball.style.top = positionY + "px";
+          if (positionY <= 0) {
+            directionY = 1;
+            ball.style.background = colores[3];
+          };
+      }
+    };
+
+    function changeColor() {
+      for (let index = counter; index < array.length; index++) {
+        const element = array[index];
+        name
+      }
+      
+    }
+
+    setInterval(movement, 1);
+        
+  </script>
+</body>
