@@ -2,19 +2,29 @@
   <div class="container" style="
     position: relative;
     background-color: rgb(255, 255, 255);
-    border: 2px solid black;
-    width: 350px;
-    height: 450px;">
+    border: 5px solid black;
+    width: 400px;
+    height: 260px;">
 
       <div id="ball" style="
       z-index:5;
       position:absolute;
       left:0px;
       top:0px;
-      width:50px;
-      height:50px;
+      width:40px;
+      height:40px;
       border-radius:50%;
       background: #1bce15"></div>
+
+      <div id="bar" style="
+      z-index:5;
+      position:absolute;
+      left:0px;
+      top:0px;
+      width:40px;
+      height:16px;
+      border-radius:3px;
+      background: #aaaaaa"></div>
   </div>
 
   <script>
@@ -25,9 +35,19 @@
     var positionY = 100;
     var directionX = 1;
     var directionY = 1;
-    var ball = document.getElementById('ball');
+    var growing = true;
+    var width = 35;
     var counter = 0;
+    var maxSize = 70;
+    var minSize = 40;
+    var ball = document.getElementById('ball');
+    var bar = document.getElementById('bar');
+    ball.style.width = (width + "px");
+    ball.style.height = (width + "px");
+    bar.style.top = 220 + "px";
 
+
+    //var colores = ["#0000aa", "#0000aa", "#0000aa", "#0000aa"];
     var colores = ["#ce1515", "#1bce15", "#0000aa", "#f1e31e"];
     // YOUR CODE 
     function movement(){    
@@ -35,25 +55,27 @@
       if (directionX === 1) {
         positionX = positionX + velocityX;
         ball.style.left = positionX + "px";
-          if (positionX >= 300) {
+        bar.style.left = (positionX+(width-minSize)*0.5) + "px";
+          if (positionX >= (400 - width)) {
               directionX = 0;
               ball.style.background = colores[0];
             };
       } else {
         positionX = positionX - velocityX;
         ball.style.left = positionX + "px";
+        bar.style.left = (positionX+(width-minSize)*0.5) + "px";
           if (positionX <= 0) {
             directionX = 1;
-            ball.style.background = colores[2];
+            ball.style.background = colores[1];
           };
-      }
+      };
       /////// Vertical movement
       if (directionY === 1) {
         positionY = positionY + velocityY;
         ball.style.top = positionY + "px";
-          if (positionY >= 400) {
+          if (positionY >= (230 - width)) {
               directionY = 0;
-              ball.style.background = colores[1];
+              ball.style.background = colores[2];
             };
       } else {
         positionY = positionY - velocityY;
@@ -65,15 +87,29 @@
       }
     };
 
-    function changeColor() {
-      for (let index = counter; index < array.length; index++) {
-        const element = array[index];
-        name
+
+    function changeSize() {
+      if (growing) {
+          width = width + 1;
+          ball.style.width = (width + "px");
+          ball.style.height = (width + "px");
+          if (width >= maxSize) {
+            growing = false;
+            width = maxSize;
+          }
+      } else {
+          width = width - 1;
+          ball.style.width = (width + "px");
+          ball.style.height = (width + "px");
+          if (width <= minSize) {
+            growing = true;
+            width = minSize;    
+          }   
       }
-      
     }
 
     setInterval(movement, 1);
+    setInterval(changeSize, 20);
         
   </script>
 </body>
